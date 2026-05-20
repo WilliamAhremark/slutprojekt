@@ -1363,49 +1363,56 @@ function initLesson(lessonElement) {
 
 function initScrollReveal() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const targets = document.querySelectorAll([
-    '.tracks-section',
-    '.track-card',
-    '.architecture-section',
-    '.architecture-grid article',
-    '.spotlight',
-    '.home-footer',
-    '.lesson',
-    '.lesson-panel',
-    '.editor-shell',
-    '.preview-shell',
-    '.settings-group',
-    '.settings-actions',
-    '.basic-card',
-    '.compact-footer'
-  ].join(','));
+  const targets = Array.from(document.body.querySelectorAll('*')).filter((element) => {
+    return !['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(element.tagName);
+  });
 
   targets.forEach((element, index) => {
     element.classList.add('reveal-item');
     element.style.transitionDelay = `${Math.min(index % 4, 3) * 45}ms`;
   });
 
-  if (reduceMotion || !('IntersectionObserver' in window)) {
+  if (reduceMotion) {
     targets.forEach((element) => element.classList.add('is-visible'));
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        return;
+  function checkScrollAnimations() {
+    const viewportTop = window.scrollY;
+    const viewportBottom = window.scrollY + window.innerHeight;
+
+    targets.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const elTopAbs = window.scrollY + rect.top;
+      const elBottomAbs = elTopAbs + rect.height;
+      let triggerRatio = 0.5;
+      if (rect.height > 400) {
+        triggerRatio = 0.33;
+      } else if (rect.height < 200) {
+        triggerRatio = 0.67;
       }
-      if (entry.intersectionRatio === 0) {
-        entry.target.classList.remove('is-visible');
+
+      const elTriggerPoint = elTopAbs + rect.height * triggerRatio;
+      const isInViewport = elBottomAbs > viewportTop && elTopAbs < viewportBottom;
+
+      if (isInViewport || (elTriggerPoint < viewportBottom && elTriggerPoint > viewportTop)) {
+        if (!element.classList.contains('is-visible')) {
+          element.classList.add('is-visible');
+          element.style.transition = '';
+        }
+      } else if (element.classList.contains('is-visible') && elTopAbs > viewportBottom) {
+        element.classList.remove('is-visible');
+        element.style.transition = 'none';
+        void element.offsetWidth;
+        element.style.transition = '';
       }
     });
-  }, {
-    threshold: [0, 0.14, 1],
-    rootMargin: '0px 0px -8% 0px'
-  });
+  }
 
-  targets.forEach((element) => observer.observe(element));
+  checkScrollAnimations();
+  window.addEventListener('scroll', checkScrollAnimations, { passive: true });
+  window.addEventListener('resize', checkScrollAnimations);
+  window.triggerScrollAnimations = checkScrollAnimations;
 }
 
 function initHamburgerMenu() {

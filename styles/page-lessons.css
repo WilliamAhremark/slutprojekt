@@ -4,8 +4,7 @@
 }
 
 .page.lessons-page {
-  width: calc(100% - clamp(18px, 3vw, 42px));
-  max-width: none;
+  width: min(1200px, calc(100% - clamp(18px, 3vw, 42px)));
   margin: 0 auto;
 }
 
@@ -108,6 +107,13 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.lesson-header .badge {
+  align-self: center;
+  max-width: 320px;
+  width: fit-content;
+  text-align: center;
 }
 
 .lesson-number {
