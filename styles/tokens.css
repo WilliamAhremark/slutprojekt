@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Archivo:wght@600;700;800&display=swap');
+
+:root {
+  color-scheme: dark;
+
+  /* Typography */
+  --font-body: 'Outfit', 'Segoe UI', sans-serif;
+  --font-heading: 'Archivo', 'Outfit', sans-serif;
+
+  /* Base palette */
+  --bg-page: #020407;
+  --bg-surface: #101217;
+  --bg-elevated: #141821;
+  --bg-editor: #06080d;
+  --bg-panel: #0b0f16;
+  --bg-input: #0d1118;
+
+  --text-primary: #f4f7fb;
+  --text-secondary: #a6b2c3;
+  --text-muted: #7a8492;
+
+  --line-soft: #202835;
+  --line-strong: #2a3444;
+
+  /* Accent palette */
+  --cyan: #13d3ff;
+  --cyan-soft: rgba(19, 211, 255, 0.22);
+  --amber: #ffbe2e;
+  --amber-soft: rgba(255, 190, 46, 0.2);
+
+  /* Shared effects */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-glow-cyan: 0 0 0 1px rgba(19, 211, 255, 0.3), 0 0 36px rgba(19, 211, 255, 0.35);
+  --shadow-glow-amber: 0 0 0 1px rgba(255, 190, 46, 0.35), 0 0 30px rgba(255, 190, 46, 0.28);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+}
+
+/* Light Mode */
+html[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-page: #f5f7fb;
+  --bg-surface: #ffffff;
+  --bg-elevated: #fafbfd;
+  --bg-editor: #f9fafc;
+  --bg-panel: #f0f3f8;
+  --bg-input: #eef1f7;
+
+  --text-primary: #1a1f2e;
+  --text-secondary: #5a6570;
+  --text-muted: #8a9199;
+
+  --line-soft: #dce4ed;
+  --line-strong: #c8d1e0;
+
+  --cyan: #0890d9;
+  --cyan-soft: rgba(8, 144, 217, 0.15);
+  --amber: #d97706;
+  --amber-soft: rgba(217, 119, 6, 0.1);
+
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-glow-cyan: 0 0 0 1px rgba(8, 144, 217, 0.3), 0 0 36px rgba(8, 144, 217, 0.15);
+  --shadow-glow-amber: 0 0 0 1px rgba(217, 119, 6, 0.3), 0 0 30px rgba(217, 119, 6, 0.1);
+}

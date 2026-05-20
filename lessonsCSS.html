@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Animations Lessons</title>
+    <meta name="description" content="CSS animation lessons and guided learning paths from AnimaCadamy." />
+    <meta name="theme-color" content="#090d13" />
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/shell.css" />
+    <link rel="stylesheet" href="styles/page-lessons.css" />
+  </head>
+  <body class="page-lessons page-lessons-css">
+    <div class="app-shell">
+      <header class="app-navbar">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"></span>
+          <div>
+            <strong>AnimaCadamy</strong>
+            <span>The Architectural Shadow</span>
+          </div>
+        </a>
+
+        <nav class="app-nav" id="primary-navigation" aria-label="primary navigation" data-nav-menu>
+          <a class="nav-link nav-link-home" href="index.html">Home</a>
+          <a class="nav-link nav-link-css" href="lessonsCSS.html">CSS lesson</a>
+          <a class="nav-link nav-link-javascript" href="lessonsJavaScript.html">JavaScript lesson</a>
+          <a class="nav-link" href="lessonsJitter.html">Jitter lesson</a>
+          <a class="nav-link nav-link-settings" href="settings.html">Settings</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+          <a class="nav-link" href="copyright.html">Copyright</a>
+        </nav>
+
+        <div class="app-navbar-actions">
+          <button class="menu-toggle" data-menu-toggle type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <a href="settings.html" aria-label="Open account settings"><div class="avatar" aria-hidden="true"></div></a>
+        </div>
+      </header>
+
+      <main class="page lessons-page">
+        <section class="lesson-stack">
+          <article class="lesson" id="lesson-1" data-accent="cyan" data-lesson-id="1">
+            <aside class="lesson-sidebar">
+              <div class="lesson-header">
+                <span class="lesson-number">LESSON 1</span>
+                <h2 class="lesson-title">Pulse Effect</h2>
+                <span class="badge badge-cyan">Pulse animation</span>
+              </div>
+              
+              <div class="lesson-description">
+                <p class="lesson-copy">
+                  Create a rhythmic breathing effect.
+                </p>
+                <p class="lesson-copy">
+                  Manipulate scaling factors and box-shadow expansion to emulate life.
+                </p>
+              </div>
+              
+              <div class="learning-path-intro">
+                <h3>Start Learning Path Before Coding</h3>
+                <p>Open the guided path first. You will understand the structure and logic in small steps before you edit code.</p>
+              </div>
+              
+              <button class="btn hint hint-more-btn" type="button">Open Learning Path</button>
+              
+              <div class="visual-reference-small">
+                <p class="sidebar-label">Visual reference</p>
+                <div class="visual-card">
+                  <div class="pulse-dot"></div>
+                </div>
+              </div>
+            </aside>
+
+            <div class="lesson-main">
+              <div class="editor-shell card">
+                <div class="editor-header">
+                  <div class="tabs">
+                    <button class="tab active" data-tab="css" type="button">styles.css</button>
+                    <button class="tab" data-tab="html" type="button">index.html</button>
+                  </div>
+                  <button class="btn-outline" type="button">View original code</button>
+                </div>
+
+                <div class="editor-body">
+                  <textarea class="code-pane" data-pane="css" spellcheck="false"></textarea>
+                  <textarea class="code-pane hidden" data-pane="html" spellcheck="false"></textarea>
+                </div>
+
+                <div class="editor-footer">
+                  <div class="editor-actions">
+                    <button class="btn btn-ghost" data-action="reset" type="button">Reset</button>
+                    <button class="btn btn-run-cyan" data-action="run" type="button">▶ Run</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="preview-shell card">
+                <div class="preview-head">
+                  <p class="preview-title">Your preview</p>
+                  <span class="preview-dot"></span>
+                </div>
+                <div class="preview-frame">
+                  <iframe title="Lesson 1 preview"></iframe>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Lesson 1 Controls -->
+          <div class="lesson-controls" id="lesson-1-controls" data-lesson-id="1">
+            <button class="btn btn-run-cyan" onclick="LessonProgression.completeLessonAndUnlockNext(1)">✓ Complete Lesson & Continue</button>
+            <button class="btn btn-ghost" onclick="location.href='#lesson-2'">Next: Lesson 2 →</button>
+            <button class="btn btn-ghost" onclick="if(confirm('Reset all lessons to start over?')) LessonProgression.resetAllLessons()">↻ Reset All</button>
+          </div>
+
+          <article class="lesson" data-accent="amber" data-lesson-id="2">
+            <aside class="lesson-sidebar">
+              <div class="lesson-header">
+                <span class="lesson-number">LESSON 2</span>
+                <h2 class="lesson-title">Morphing Glow</h2>
+                <span class="badge badge-amber">Morph animation</span>
+              </div>
+              
+              <div class="lesson-description">
+                <p class="lesson-copy">
+                  Create a smooth transition between a square and a circle while applying a dynamic box-shadow glow.
+                </p>
+              </div>
+              
+              <div class="learning-path-intro">
+                <h3>Start Learning Path Before Coding</h3>
+                <p>Open the guided path first. You will understand the structure and logic in small steps before you edit code.</p>
+              </div>
+              
+              <button class="btn hint hint-more-btn" type="button">Open Learning Path</button>
+              
+              <div class="visual-reference-small">
+                <p class="sidebar-label">Visual reference</p>
+                <div class="visual-card">
+                  <div class="morph-shape"></div>
+                </div>
+              </div>
+            </aside>
+
+            <div class="lesson-main">
+              <div class="editor-shell card">
+                <div class="editor-header">
+                  <div class="tabs">
+                    <button class="tab active" data-tab="css" type="button">styles.css</button>
+                    <button class="tab" data-tab="html" type="button">index.html</button>
+                  </div>
+                  <button class="btn-outline" type="button">View original code</button>
+                </div>
+
+                <div class="editor-body">
+                  <textarea class="code-pane" data-pane="css" spellcheck="false"></textarea>
+                  <textarea class="code-pane hidden" data-pane="html" spellcheck="false"></textarea>
+                </div>
+
+                <div class="editor-footer">
+                  <div class="editor-actions">
+                    <button class="btn btn-ghost" data-action="reset" type="button">Reset</button>
+                    <button class="btn btn-run-amber" data-action="run" type="button">▶ Run</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="preview-shell card">
+                <div class="preview-head">
+                  <p class="preview-title">Your preview</p>
+                  <span class="preview-dot"></span>
+                </div>
+                <div class="preview-frame">
+                  <iframe title="Lesson 2 preview"></iframe>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Lesson 2 Controls -->
+          <div class="lesson-controls" id="lesson-2-controls" data-lesson-id="2">
+            <button class="btn btn-run-amber" onclick="LessonProgression.completeLessonAndUnlockNext(2)">✓ Complete Lesson & Continue</button>
+            <button class="btn btn-ghost" onclick="location.href='#lesson-1'">← Previous: Lesson 1</button>
+            <button class="btn btn-ghost" onclick="if(confirm('Reset all lessons to start over?')) LessonProgression.resetAllLessons()">↻ Reset All</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jitter Lessons</title>
+    <meta name="description" content="Jitter animation lessons and guided learning paths from AnimaCadamy." />
+    <meta name="theme-color" content="#090d13" />
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/shell.css" />
+    <link rel="stylesheet" href="styles/page-lessons.css" />
+  </head>
+  <body class="page-lessons page-lessons-jitter">
+    <div class="app-shell">
+      <header class="app-navbar">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"></span>
+          <div>
+            <strong>AnimaCadamy</strong>
+            <span>The Architectural Shadow</span>
+          </div>
+        </a>
+
+        <nav class="app-nav" id="primary-navigation" aria-label="primary navigation" data-nav-menu>
+          <a class="nav-link nav-link-home" href="index.html">Home</a>
+          <a class="nav-link nav-link-css" href="lessonsCSS.html">CSS lesson</a>
+          <a class="nav-link nav-link-javascript" href="lessonsJavaScript.html">JavaScript lesson</a>
+          <a class="nav-link" href="lessonsJitter.html">Jitter lesson</a>
+          <a class="nav-link nav-link-settings" href="settings.html">Settings</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+          <a class="nav-link" href="copyright.html">Copyright</a>
+        </nav>
+
+        <div class="app-navbar-actions">
+          <button class="menu-toggle" data-menu-toggle type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <a href="settings.html" aria-label="Open account settings"><div class="avatar" aria-hidden="true"></div></a>
+        </div>
+      </header>
+
+      <main class="page lessons-page">
+        <section class="lesson-stack">
+          <article class="lesson" id="lesson-5" data-accent="cyan" data-lesson-id="5">
+            <aside class="lesson-sidebar">
+              <div class="lesson-header">
+                <span class="lesson-number">LESSON 5</span>
+                <h2 class="lesson-title">Jitter Micro Motion</h2>
+                <span class="badge badge-cyan">CSS jitter</span>
+              </div>
+              
+              <div class="lesson-description">
+                <p class="lesson-copy">
+                  Build a micro motion jitter using keyframes and small random offsets.
+                </p>
+                <p class="lesson-copy">
+                  Use short durations to keep the motion alive without being distracting.
+                </p>
+              </div>
+              
+              <div class="learning-path-intro">
+                <h3>Start Learning Path Before Coding</h3>
+                <p>Open the guided path first. You will understand the structure and logic in small steps before you edit code.</p>
+              </div>
+              
+              <button class="btn hint hint-more-btn" type="button">Open Learning Path</button>
+              
+              <div class="visual-reference-small">
+                <p class="sidebar-label">Visual reference</p>
+                <div class="visual-card">
+                  <div class="jitter-dot"></div>
+                </div>
+              </div>
+            </aside>
+
+            <div class="lesson-main">
+              <div class="editor-shell card">
+                <div class="editor-header">
+                  <div class="tabs">
+                    <button class="tab active" data-tab="css" type="button">styles.css</button>
+                    <button class="tab" data-tab="html" type="button">index.html</button>
+                  </div>
+                  <button class="btn-outline" type="button">View original code</button>
+                </div>
+
+                <div class="editor-body">
+                  <textarea class="code-pane" data-pane="css" spellcheck="false"></textarea>
+                  <textarea class="code-pane hidden" data-pane="html" spellcheck="false"></textarea>
+                </div>
+
+                <div class="editor-footer">
+                  <div class="editor-actions">
+                    <button class="btn btn-ghost" data-action="reset" type="button">Reset</button>
+                    <button class="btn btn-run-cyan" data-action="run" type="button">▶ Run</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="preview-shell card">
+                <div class="preview-head">
+                  <p class="preview-title">Your preview</p>
+                  <span class="preview-dot"></span>
+                </div>
+                <div class="preview-frame">
+                  <iframe title="Lesson 5 preview"></iframe>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Lesson 5 Controls -->
+          <div class="lesson-controls" id="lesson-5-controls" data-lesson-id="5">
+            <button class="btn btn-run-cyan" onclick="LessonProgression.completeLessonAndUnlockNext(5)">✓ Complete Lesson & Continue</button>
+            <button class="btn btn-ghost" onclick="location.href='lessonsJavaScript.html#lesson-4'">← Previous: Lesson 4 (JS)</button>
+            <button class="btn btn-ghost" onclick="location.href='#lesson-6'">Next: Lesson 6 →</button>
+            <button class="btn btn-ghost" onclick="if(confirm('Reset all lessons to start over?')) LessonProgression.resetAllLessons()">↻ Reset All</button>
+          </div>
+
+          <article class="lesson" id="lesson-6" data-accent="amber" data-lesson-id="6">
+            <aside class="lesson-sidebar">
+              <div class="lesson-header">
+                <span class="lesson-number">LESSON 6</span>
+                <h2 class="lesson-title">Jitter With JavaScript</h2>
+                <span class="badge badge-amber">JS jitter</span>
+              </div>
+              
+              <div class="lesson-description">
+                <p class="lesson-copy">
+                  Add jitter using JavaScript and requestAnimationFrame.
+                </p>
+                <p class="lesson-copy">
+                  Control how fast and how far the element moves each tick.
+                </p>
+              </div>
+              
+              <div class="learning-path-intro">
+                <h3>Start Learning Path Before Coding</h3>
+                <p>Open the guided path first. You will understand the structure and logic in small steps before you edit code.</p>
+              </div>
+              
+              <button class="btn hint hint-more-btn" type="button">Open Learning Path</button>
+              
+              <div class="visual-reference-small">
+                <p class="sidebar-label">Visual reference</p>
+                <div class="visual-card">
+                  <div class="jitter-square"></div>
+                </div>
+              </div>
+            </aside>
+
+            <div class="lesson-main">
+              <div class="editor-shell card">
+                <div class="editor-header">
+                  <div class="tabs">
+                    <button class="tab active" data-tab="css" type="button">styles.css</button>
+                    <button class="tab" data-tab="html" type="button">index.html</button>
+                  </div>
+                  <button class="btn-outline" type="button">View original code</button>
+                </div>
+
+                <div class="editor-body">
+                  <textarea class="code-pane" data-pane="css" spellcheck="false"></textarea>
+                  <textarea class="code-pane hidden" data-pane="html" spellcheck="false"></textarea>
+                </div>
+
+                <div class="editor-footer">
+                  <div class="editor-actions">
+                    <button class="btn btn-ghost" data-action="reset" type="button">Reset</button>
+                    <button class="btn btn-run-amber" data-action="run" type="button">▶ Run</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="preview-shell card">
+                <div class="preview-head">
+                  <p class="preview-title">Your preview</p>
+                  <span class="preview-dot"></span>
+                </div>
+                <div class="preview-frame">
+                  <iframe title="Lesson 6 preview"></iframe>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Lesson 6 Controls -->
+          <div class="lesson-controls" id="lesson-6-controls" data-lesson-id="6">
+            <button class="btn btn-run-amber" onclick="LessonProgression.completeLessonAndUnlockNext(6)">✓ Complete Lesson</button>
+            <button class="btn btn-ghost" onclick="location.href='#lesson-5'">← Previous: Lesson 5</button>
+            <button class="btn btn-ghost" onclick="if(confirm('Reset all lessons to start over?')) LessonProgression.resetAllLessons()">↻ Reset All</button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="compact-footer">
+        <span>Jitter lessons</span>
+        <a href="contact.html">Contact</a>
+        <a href="copyright.html">Copyright</a>
+      </footer>
+    </div>
+
+    <!-- Jitter Access Denied Modal -->
+    <div id="jitterLockedModal" class="modal" style="display: none;">
+      <div class="modal-overlay"></div>
+      <div class="modal-content" style="max-width: 400px;">
+        <div class="locked-message">
+          <div class="lock-icon">🔒</div>
+          <h2>Jitter Lessons Locked</h2>
+          <p>You have to buy Architect Pro to access this course.</p>
+          <p class="locked-description">Unlock Lessons 5 & 6 and master advanced jitter animations with your pro subscription.</p>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn btn-ghost" id="closeLocked">Close</button>
+            <button type="button" class="btn btn-run-cyan" id="buyFromLocked">Buy Architect Pro</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal" style="display: none;">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Upgrade to Architect Pro</h2>
+          <button type="button" class="modal-close" id="closeModal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="plan-details">
+            <h3>Architect Pro</h3>
+            <p class="plan-description">Full access to precision tools, jitter animations, and private architectural repositories.</p>
+            
+            <div class="plan-features">
+              <div class="feature-item">✓ CSS Animations (Lessons 1-2)</div>
+              <div class="feature-item">✓ JavaScript Animations (Lessons 3-4)</div>
+              <div class="feature-item">✓ Jitter Animations (Lessons 5-6)</div>
+              <div class="feature-item">✓ Full course access</div>
+            </div>
+            
+            <div class="price-display">
+              <span class="price">$49</span>
+              <span class="billing-period">/month (one-time demo charge)</span>
+            </div>
+          </div>
+          
+          <form id="paymentForm" class="payment-form">
+            <div class="form-group">
+              <label for="cardName">Cardholder Name</label>
+              <input type="text" id="cardName" placeholder="Alexander Shimmer" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="cardNumber">Card Number</label>
+              <input type="text" id="cardNumber" placeholder="4532 1234 5678 9010" required />
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input type="text" id="expiryDate" placeholder="MM/YY" required />
+              </div>
+              <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" required />
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancelPayment">Cancel</button>
+          <button type="button" class="btn btn-run-cyan" id="payButton" style="min-width: 180px;">
+            <span id="payButtonText">Pay $49</span>
+            <span id="paymentLoader" style="display: none; margin-left: 8px;">⏳</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
