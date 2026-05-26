@@ -5,11 +5,6 @@
   min-width: 0;
 }
 
-html.nav-open,
-html.nav-open body {
-  overflow: hidden;
-}
-
 body {
   animation: none;
 }
@@ -211,53 +206,84 @@ body {
   gap: 10px;
   margin-left: auto;
   position: relative;
-  z-index: 31;
+  z-index: 90;
   min-width: 0;
   flex: 0 0 auto;
 }
 
 .menu-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--line-strong);
+  background: rgba(8, 13, 20, 0.6);
+  color: #e3eefb;
   position: relative;
-  z-index: 32;
-  display: inline-flex;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid var(--line-soft);
-  background: #090d13;
+  z-index: 95;
+  display: none;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 0;
   flex-direction: column;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateX(12px) scale(0.96);
-  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease, border-color 0.2s ease, background 0.2s ease;
+  gap: 5px;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.menu-toggle span {
-  width: 16px;
+.menu-toggle:hover {
+  border-color: rgba(19, 211, 255, 0.45);
+  background: rgba(8, 20, 34, 0.7);
+}
+
+.menu-toggle__bar {
+  width: 18px;
   height: 2px;
   border-radius: 999px;
-  background: #dce7f5;
-  display: block;
-  transform-origin: center;
-  transition: transform 0.28s ease, opacity 0.22s ease, width 0.22s ease;
+  background: #d9e6f6;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
 }
 
-.app-shell.nav-open .menu-toggle span:nth-child(1) {
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
 
-.app-shell.nav-open .menu-toggle span:nth-child(2) {
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(2) {
   opacity: 0;
-  transform: scaleX(0.3);
+  width: 14px;
 }
 
-.app-shell.nav-open .menu-toggle span:nth-child(3) {
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
+}
+/* When menu is open lock document scroll and preserve scroll position
+   JS sets --scroll-y on :root (documentElement) to -<scrollY>px
+   Use that to position the body fixed so viewport doesn't move and
+   the mobile nav overlay can cover the entire screen. */
+html.menu-open {
+  overflow: hidden;
+  height: 100%;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+body.menu-open {
+  overflow: hidden;
+  height: 100%;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+html.menu-open .app-navbar {
+  z-index: 1101;
+}
+
+html.menu-open .menu-toggle {
+  z-index: 1102;
+}
+
+html.menu-open .app-navbar-actions {
+  position: fixed;
+  top: 14px;
+  right: clamp(12px, 3vw, 20px);
+  z-index: 1102;
 }
 
 .icon-ring {
@@ -281,120 +307,104 @@ body {
 }
 
 @media (max-width: 1120px) {
-  .menu-toggle {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(0) scale(1);
-  }
-
   .app-navbar {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
   }
 
-  .app-shell.nav-open .app-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+  .app-nav {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .app-navbar {
+    z-index: 80;
   }
 
   .app-nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 20;
-
-    width: auto;
-    max-width: 100%;
-
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
     height: 100dvh;
-    max-height: 100dvh;
-
-    padding: calc(82px + 18px + env(safe-area-inset-top, 0px)) clamp(14px, 4vw, 24px)
-         calc(22px + env(safe-area-inset-bottom, 0px));
-
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    align-content: start;
-    justify-items: stretch;
-
-    background: linear-gradient(180deg, rgba(8, 15, 23, 0.98), rgba(3, 6, 11, 0.98));
-    backdrop-filter: blur(22px);
-
-    transform: translateX(-100%);
+    height: 100svh;
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 14px;
+    padding: 110px clamp(18px, 6vw, 36px) 40px;
+    background: radial-gradient(circle at 80% 10%, rgba(10, 145, 200, 0.18), transparent 45%),
+      linear-gradient(180deg, rgba(2, 6, 12, 0.98), rgba(2, 6, 12, 0.94));
     opacity: 0;
+    transform: translateY(-12px);
     pointer-events: none;
-
+    visibility: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
+  }
 
-    will-change: transform, opacity;
+  .app-nav.menu-anim {
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+  }
 
-    transition:
-      transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.28s ease;
-}
+  .app-nav.no-anim {
+    transition: none !important;
+  }
 
-  .app-shell.nav-open .app-nav {
+  .app-nav.is-open {
     opacity: 1;
+    transform: translateY(0);
     pointer-events: auto;
-    transform: translateX(0);
+    visibility: visible;
   }
 
-  .nav-link {
-    width: 100%;
-    justify-content: flex-start;
+  html.menu-open .app-nav,
+  body.menu-open .app-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    height: 100svh;
+    touch-action: auto;
+  }
+
+  .app-nav .nav-link {
     min-height: 52px;
-    padding: 0 16px;
     font-size: 16px;
+    padding: 0 16px;
     border-radius: 14px;
-    transform: translateX(-16px);
-    opacity: 0;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    background: rgba(8, 20, 34, 0.6);
+    border: 1px solid rgba(30, 70, 110, 0.55);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   }
 
-  .app-shell.nav-open .nav-link {
-    transform: translateX(0);
-    opacity: 1;
+  .app-nav .nav-link:hover {
+    border-color: rgba(19, 211, 255, 0.55);
+    background: rgba(10, 35, 50, 0.8);
   }
 
-  .app-shell.nav-open .nav-link:nth-child(1) { transition-delay: 0.03s; }
-  .app-shell.nav-open .nav-link:nth-child(2) { transition-delay: 0.08s; }
-  .app-shell.nav-open .nav-link:nth-child(3) { transition-delay: 0.13s; }
-
-  .app-shell:not(.nav-open) .nav-link {
-    transition-delay: 0s;
+  .app-nav .nav-link[aria-current="page"] {
+    color: #f2f8ff;
+    border-color: rgba(19, 211, 255, 0.55);
+    background: rgba(10, 35, 45, 0.82);
   }
-
-  .app-navbar-actions {
-    margin-left: auto;
-    position: relative;
-    z-index: 21;
-  }
-
-  .menu-toggle {
-    opacity: 0.96;
-    transform: translateX(0);
-  }
-
-  .app-shell.nav-open .menu-toggle {
-    opacity: 1;
-  }
-
-  .app-shell.nav-open .brand,
-  .app-shell.nav-open .icon-ring,
-  .app-shell.nav-open .avatar {
-    opacity: 0.45;
-  }
-
-  .app-shell.nav-open .app-main {
-    filter: blur(1px);
-  }
-
 }
 
 @media (max-width: 620px) {
@@ -408,11 +418,6 @@ body {
     max-width: 16ch;
   }
 
-  .app-nav {
-    padding-top: calc(70px + 18px + env(safe-area-inset-top, 0px));
-    padding-left: 14px;
-    padding-right: 14px;
-  }
 }
 
 @media (max-width: 430px) {
@@ -478,20 +483,6 @@ html[data-theme="light"] .page-settings .nav-link-settings {
   background: rgba(8, 144, 217, 0.1);
 }
 
-html[data-theme="light"] .menu-toggle {
-  background: #ffffff;
-  border-color: #dce4ed;
-}
-
-html[data-theme="light"] .menu-toggle:hover {
-  background: #f9fafc;
-  border-color: #c8d1e0;
-}
-
-html[data-theme="light"] .menu-toggle span {
-  background: #1a1f2e;
-}
-
 html[data-theme="light"] .icon-ring {
   background: #ffffff;
   color: #5a6570;
@@ -503,8 +494,3 @@ html[data-theme="light"] .avatar {
   background: radial-gradient(circle at 35% 25%, #cbd5e1, #94a3b8);
 }
 
-@media (max-width: 1120px) {
-  html[data-theme="light"] .app-nav {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 247, 251, 0.95));
-  }
-}

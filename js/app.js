@@ -1415,48 +1415,6 @@ function initScrollReveal() {
   window.triggerScrollAnimations = checkScrollAnimations;
 }
 
-function initHamburgerMenu() {
-  const shell = document.querySelector('.app-shell');
-  const toggle = document.querySelector('[data-menu-toggle]');
-  const menu = document.querySelector('[data-nav-menu]');
-  if (!shell || !toggle || !menu) return;
-
-  const closeMenu = () => {
-    shell.classList.remove('nav-open');
-    document.documentElement.classList.remove('nav-open');
-    toggle.setAttribute('aria-expanded', 'false');
-  };
-  toggle.addEventListener('click', () => {
-    const isOpen = shell.classList.toggle('nav-open');
-    document.documentElement.classList.toggle('nav-open', isOpen);
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeMenu();
-  });
-  window.addEventListener('resize', () => {
-    if (!window.matchMedia('(max-width: 1120px)').matches) closeMenu();
-  });
-  menu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (window.matchMedia('(max-width: 1120px)').matches) closeMenu();
-    });
-  });
-  document.addEventListener('click', (event) => {
-    if (!shell.classList.contains('nav-open')) return;
-
-    if (event.target.closest('.app-navbar, .app-nav')) return;
-
-    closeMenu();
-  });
-
-  const desktopNav = () => {
-    if (!window.matchMedia('(max-width: 1120px)').matches) closeMenu();
-  };
-
-  window.addEventListener('resize', desktopNav);
-}
-
 function initVisualReferenceFollow() {
   document.querySelectorAll('.lesson[data-lesson-id="3"] .lesson-visual-reference-card .visual-card').forEach((card) => {
     const mover = card.querySelector('.visual-mover');
@@ -1635,6 +1593,116 @@ function setActiveNavLink() {
   });
 }
 
+function initMobileMenu() {
+  const menuToggle = document.querySelector('[data-menu-toggle]');
+  const navMenu = document.querySelector('[data-nav-menu]');
+  if (!menuToggle || !navMenu) return;
+
+  const htmlElement = document.documentElement;
+  const bodyElement = document.body;
+  const linkSelector = 'a[href]';
+  let scrollPosition = 0;
+  let previousScrollBehavior = '';
+  let scrollLockActive = false;
+
+  const getScrollY = () => {
+    return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  };
+
+  const preventScroll = (event) => {
+    if (!scrollLockActive) return;
+    event.preventDefault();
+  };
+
+  const preventScrollKeys = (event) => {
+    if (!scrollLockActive) return;
+    const blockedKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+    if (blockedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  };
+
+  const enableScrollLock = () => {
+    if (scrollLockActive) return;
+    scrollLockActive = true;
+    document.addEventListener('wheel', preventScroll, { passive: false });
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+    document.addEventListener('keydown', preventScrollKeys);
+  };
+
+  const disableScrollLock = () => {
+    if (!scrollLockActive) return;
+    scrollLockActive = false;
+    document.removeEventListener('wheel', preventScroll, { passive: false });
+    document.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.removeEventListener('keydown', preventScrollKeys);
+  };
+
+  const setMenuState = (isOpen) => {
+    if (isOpen) {
+      scrollPosition = getScrollY();
+      previousScrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.documentElement.style.setProperty('--scroll-y', `-${scrollPosition}px`);
+      enableScrollLock();
+    } else {
+      document.documentElement.style.removeProperty('--scroll-y');
+      disableScrollLock();
+      const restoreScroll = () => window.scrollTo(0, scrollPosition);
+      requestAnimationFrame(restoreScroll);
+      if (previousScrollBehavior) {
+        document.documentElement.style.scrollBehavior = previousScrollBehavior;
+      } else {
+        document.documentElement.style.scrollBehavior = '';
+      }
+    }
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    navMenu.classList.toggle('is-open', isOpen);
+    htmlElement.classList.toggle('menu-open', isOpen);
+    bodyElement.classList.toggle('menu-open', isOpen);
+  };
+
+  const toggleMenu = () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      navMenu.classList.add('no-anim');
+      setMenuState(false);
+      requestAnimationFrame(() => {
+        navMenu.classList.remove('no-anim');
+      });
+      return;
+    }
+    navMenu.classList.add('menu-anim');
+    setMenuState(true);
+  };
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  navMenu.addEventListener('click', (event) => {
+    const targetLink = event.target.closest(linkSelector);
+    if (targetLink) {
+      navMenu.classList.add('menu-anim');
+      setMenuState(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      navMenu.classList.add('menu-anim');
+      setMenuState(false);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) {
+      setMenuState(false);
+    }
+  });
+
+  setMenuState(false);
+}
+
 function initSettingsPage() {
   // Render subscription card
   SubscriptionManager.renderSubscriptionCard();
@@ -1782,7 +1850,7 @@ function initSettingsPage() {
 initThemeSwitcher();
 applyStoredAvatar();
 setActiveNavLink();
-initHamburgerMenu();
+initMobileMenu();
 initSettingsPage();
 document.querySelectorAll('.lesson').forEach(initLesson);
 initVisualReferenceFollow();
